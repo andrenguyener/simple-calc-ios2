@@ -25,6 +25,16 @@ enum SpecialOperation:String {
 }
 
 class ViewController: UIViewController {
+    
+    var wordBank:[String] = ["hello"]
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is ViewController2 {
+            let talkView = segue.destination as? ViewController2
+            talkView?.wordBank = wordBank
+        }
+    }
+    
 
     @IBOutlet weak var outputLabel: UILabel!
     
@@ -37,6 +47,10 @@ class ViewController: UIViewController {
     var count = 0
     var sum = 0.0
     var sumCount = 0
+    var historyAvg = ""
+    var historyCount = ""
+    var historyBasic = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +62,7 @@ class ViewController: UIViewController {
         if runningNumber.count <= 8 {
             runningNumber += "\(sender.tag)"
             outputLabel.text = runningNumber
+            historyBasic += "\(runningNumber)"
         }
     }
     
@@ -62,19 +77,28 @@ class ViewController: UIViewController {
         count = 0
         sum = 0
         sumCount = 0
+        historyAvg = ""
+        historyCount = ""
+        historyBasic = ""
     }
     
     @IBAction func dotPressed(_ sender: RoundButton) {
         if runningNumber.count <= 7 {
             runningNumber += "."
             outputLabel.text = runningNumber
+            historyBasic += "\(runningNumber)"
         }
+        
     }
     
     @IBAction func equalPressed(_ sender: RoundButton) {
         if currentSpecialOperation == .Count || currentSpecialOperation == .Avg || currentSpecialOperation == .Fact {
             if (currentSpecialOperation == .Avg) {
+                historyAvg += "\(runningNumber)"
                 sum += Double(runningNumber)!
+            }
+            if (currentSpecialOperation == .Count) {
+                historyCount += "\(runningNumber)"
             }
             runningNumber = ""
             specialOperation(specialOperation: currentSpecialOperation)
@@ -84,22 +108,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addPressed(_ sender: RoundButton) {
+        historyBasic += " + "
         operation(operation: .Add)
     }
     
     @IBAction func subtractPressed(_ sender: RoundButton) {
+        historyBasic += " - "
         operation(operation: .Subtract)
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
+        historyBasic += " * "
         operation(operation: .Multiply)
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
+        historyBasic += " / "
         operation(operation: .Divide)
     }
 
     @IBAction func modPressed(_ sender: RoundButton) {
+        historyBasic += " % "
         operation(operation: .Mod)
     }
     
@@ -119,7 +148,7 @@ class ViewController: UIViewController {
     }
     
     
-    
+    // wordBank.append(..text...)
     func operation(operation: Operation) {
         if currentOperation != .NULL {
             if runningNumber != "" {
@@ -145,14 +174,14 @@ class ViewController: UIViewController {
                 if (Double(result)!.truncatingRemainder(dividingBy: 1) == 0) {
                     result = "\(Int(Double(result)!))"
                 }
+                wordBank.append("\(historyBasic) = \(result)")
+                historyBasic = ""
                 outputLabel.text = result
                 rightValue = ""
                 currentOperation = .NULL
             } else {
                 currentOperation = operation
             }
-            
-            
         } else if(runningNumber == "" && leftValue != ""){
             currentOperation = operation
 
@@ -170,10 +199,13 @@ class ViewController: UIViewController {
             if runningNumber == "" {
                 result = "\(count + 1)"
                 outputLabel.text = result
+                wordBank.append("\(historyCount) = \(result)")
                 count = 0
                 runningNumber = ""
+                historyCount = ""
                 currentSpecialOperation = .NULL
             } else {
+                historyCount += "\(runningNumber) count "
                 count += 1
                 runningNumber = ""
             }
@@ -190,6 +222,8 @@ class ViewController: UIViewController {
                 }
                 result = "\(answer)"
                 outputLabel.text = result
+                wordBank.append("\(runningNumber)! = \(result)")
+                historyBasic = ""
                 runningNumber = ""
                 currentSpecialOperation = .NULL
             }
@@ -202,6 +236,8 @@ class ViewController: UIViewController {
                     result = "\(Int(Double(result)!))"
                 }
                 outputLabel.text = result
+                wordBank.append("\(historyAvg) = \(result)")
+                historyAvg = ""
                 runningNumber = ""
                 sum = 0
                 sumCount = 0
@@ -209,6 +245,7 @@ class ViewController: UIViewController {
             } else {
                 sum += Double(runningNumber)!
                 sumCount += 1
+                historyAvg += "\(runningNumber) avg "
                 runningNumber = ""
             }
         }

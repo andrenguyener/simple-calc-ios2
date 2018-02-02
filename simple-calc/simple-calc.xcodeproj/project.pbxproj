@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65AEA9812024109C0043B887 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AEA9802024109C0043B887 /* ViewController2.swift */; };
 		65DCC0BF201E927D00D21220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DCC0BE201E927D00D21220 /* AppDelegate.swift */; };
 		65DCC0C1201E927D00D21220 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DCC0C0201E927D00D21220 /* ViewController.swift */; };
 		65DCC0C4201E927D00D21220 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65DCC0C2201E927D00D21220 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65AEA9802024109C0043B887 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		65DCC0BB201E927D00D21220 /* simple-calc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-calc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65DCC0BE201E927D00D21220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65DCC0C0201E927D00D21220 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				65DCC0C7201E927D00D21220 /* LaunchScreen.storyboard */,
 				65DCC0CA201E927D00D21220 /* Info.plist */,
 				65DCC0EC201E993300D21220 /* RoundButton.swift */,
+				65AEA9802024109C0043B887 /* ViewController2.swift */,
 			);
 			path = "simple-calc";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65DCC0ED201E993300D21220 /* RoundButton.swift in Sources */,
+				65AEA9812024109C0043B887 /* ViewController2.swift in Sources */,
 				65DCC0C1201E927D00D21220 /* ViewController.swift in Sources */,
 				65DCC0BF201E927D00D21220 /* AppDelegate.swift in Sources */,
 			);
